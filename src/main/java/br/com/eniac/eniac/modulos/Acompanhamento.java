@@ -20,11 +20,11 @@ public class Acompanhamento {
 	public Acompanhamento(Long id, Usuario paciente, Enfermidade enfermidade) {
 		this.Paciente = paciente;
 		this.enfermidade = enfermidade;
-//		this.status = enfermidade.getTratamento().getGlicemia();
+		this.status = enfermidade.getTratamento().getGlicemia();
 	}
 
 	public void setStatus() {
-//		this.status = enfermidade.getTratamento().getGlicemia();
+		this.status = enfermidade.getTratamento().getGlicemia();
 	}
 
 }
