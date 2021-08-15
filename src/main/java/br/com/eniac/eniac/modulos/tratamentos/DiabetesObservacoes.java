@@ -1,6 +1,7 @@
 package br.com.eniac.eniac.modulos.tratamentos;
 
 import br.com.eniac.eniac.modulos.enums.StatusDiabetes;
+import br.com.eniac.eniac.modulos.tratamentos.methodos.LogicaDiabetes;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
