@@ -2,9 +2,14 @@ package br.com.eniac.eniac.modulos;
 
 import br.com.eniac.eniac.modulos.tratamentos.DiabetesObservacoes;
 
+import javax.persistence.*;
+
+@Entity
 public class Enfermidade {
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private final String nome;
+	@OneToOne
 	private DiabetesObservacoes tratamento;
 	
 	

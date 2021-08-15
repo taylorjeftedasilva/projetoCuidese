@@ -1,9 +1,14 @@
 package br.com.eniac.eniac.modulos;
 
+import javax.persistence.*;
+
+@Entity
 public class Acompanhamento {
-	
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@OneToOne
 	private Usuario Paciente;
+	@OneToOne
 	private Enfermidade enfermidade;
 	private String status;
 	

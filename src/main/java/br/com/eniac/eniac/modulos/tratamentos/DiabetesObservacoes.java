@@ -2,9 +2,14 @@ package br.com.eniac.eniac.modulos.tratamentos;
 
 import br.com.eniac.eniac.modulos.enums.StatusDiabetes;
 
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+@Entity
 public class DiabetesObservacoes {
 	public final String NOME_ENFERMIDADE = "DIABETES";
 	private boolean jejum;
+	@Enumerated(EnumType.STRING)
 	private StatusDiabetes glicemia;
 	private final int GLICEMIA_JEJUM_NORMAL = 99;
 	private final int GLICEMIA_JEJUM_ALTERADO_INICIAL= 100;
