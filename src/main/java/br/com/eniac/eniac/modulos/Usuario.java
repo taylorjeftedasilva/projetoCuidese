@@ -19,8 +19,7 @@ public class Usuario {
 	@Enumerated(EnumType.STRING)
 	private UsuarioType userType = UsuarioType.COMUM;
 	
-	public Usuario(Long id, String nome, String senha) {
-		this.id = id;
+	public Usuario(String nome, String senha) {
 		this.nome = nome;
 		this.senha = senha;
 	}

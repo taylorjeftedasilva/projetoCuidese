@@ -1,0 +1,4 @@
+INSERT INTO USUARIO (nome, senha) VALUES('Anna', '123');
+INSERT INTO DIABETES_OBSERVACOES (jejum, glicemia) VALUES(FALSE, 100);
+INSERT INTO ENFERMIDADE (tratamento_id) VALUES(1);
+INSERT INTO ACOMPANHAMENTO (paciente_id, enfermidade_id) VALUES(1, 1);

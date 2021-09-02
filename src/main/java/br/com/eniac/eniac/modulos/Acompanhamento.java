@@ -17,7 +17,7 @@ public class Acompanhamento {
 	private Enfermidade enfermidade;
 	private String status;
 
-	public Acompanhamento(Long id, Usuario paciente, Enfermidade enfermidade) {
+	public Acompanhamento(Usuario paciente, Enfermidade enfermidade) {
 		this.Paciente = paciente;
 		this.enfermidade = enfermidade;
 		this.status = enfermidade.getTratamento().getGlicemia();
