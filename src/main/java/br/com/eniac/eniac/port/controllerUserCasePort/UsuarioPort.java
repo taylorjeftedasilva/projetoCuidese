@@ -1,4 +1,4 @@
-package br.com.eniac.eniac.port.clientUserCasePort;
+package br.com.eniac.eniac.port.controllerUserCasePort;
 
 import br.com.eniac.eniac.controller.repository.UsuarioRepository;
 import br.com.eniac.eniac.entity.Usuario;

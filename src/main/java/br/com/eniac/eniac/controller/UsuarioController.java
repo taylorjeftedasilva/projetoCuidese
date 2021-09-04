@@ -1,16 +1,12 @@
 package br.com.eniac.eniac.controller;
 
 import br.com.eniac.eniac.controller.dto.UsuarioDTO;
-import br.com.eniac.eniac.controller.repository.UsuarioRepository;
 import br.com.eniac.eniac.entity.Usuario;
-import br.com.eniac.eniac.port.clientUserCasePort.UsuarioPort;
+import br.com.eniac.eniac.port.controllerUserCasePort.UsuarioPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequestMapping("/create/user")

@@ -1,12 +1,8 @@
 package br.com.eniac.eniac.controller;
 
 import br.com.eniac.eniac.controller.dto.AcompanhamentoDTO;
-import br.com.eniac.eniac.controller.repository.AcompanhamentoRepository;
-import br.com.eniac.eniac.controller.repository.LancamentoRepository;
-import br.com.eniac.eniac.controller.repository.UsuarioRepository;
 import br.com.eniac.eniac.entity.Acompanhamento;
-import br.com.eniac.eniac.entity.Lancamentos;
-import br.com.eniac.eniac.port.clientUserCasePort.AcompanhamentosPort;
+import br.com.eniac.eniac.port.controllerUserCasePort.AcompanhamentosPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
