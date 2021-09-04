@@ -1,4 +1,4 @@
-package br.com.eniac.eniac.controller.repository;
+package br.com.eniac.eniac.entity.repository;
 
 import br.com.eniac.eniac.entity.Lancamentos;
 import org.springframework.data.jpa.repository.JpaRepository;

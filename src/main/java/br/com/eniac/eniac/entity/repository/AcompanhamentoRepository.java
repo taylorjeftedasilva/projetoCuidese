@@ -1,4 +1,4 @@
-package br.com.eniac.eniac.controller.repository;
+package br.com.eniac.eniac.entity.repository;
 
 import br.com.eniac.eniac.entity.Acompanhamento;
 import br.com.eniac.eniac.entity.Usuario;

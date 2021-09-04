@@ -1,6 +1,6 @@
 package br.com.eniac.eniac.port.controllerUserCasePort;
 
-import br.com.eniac.eniac.controller.repository.UsuarioRepository;
+import br.com.eniac.eniac.entity.repository.UsuarioRepository;
 import br.com.eniac.eniac.entity.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

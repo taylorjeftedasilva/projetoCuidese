@@ -1,6 +1,6 @@
 package br.com.eniac.eniac.controller;
 
-import br.com.eniac.eniac.controller.repository.AcompanhamentoRepository;
+import br.com.eniac.eniac.entity.repository.AcompanhamentoRepository;
 import br.com.eniac.eniac.userCase.Lancamentos;
 import br.com.eniac.eniac.port.controllerUserCasePort.EnfermidadePort;
 import br.com.eniac.eniac.userCase.DiabetesObservacoes;

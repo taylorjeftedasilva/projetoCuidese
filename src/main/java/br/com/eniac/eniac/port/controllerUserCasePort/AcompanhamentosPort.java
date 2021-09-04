@@ -1,9 +1,9 @@
 package br.com.eniac.eniac.port.controllerUserCasePort;
 
 import br.com.eniac.eniac.controller.dto.AcompanhamentoDTO;
-import br.com.eniac.eniac.controller.repository.AcompanhamentoRepository;
-import br.com.eniac.eniac.controller.repository.LancamentoRepository;
-import br.com.eniac.eniac.controller.repository.UsuarioRepository;
+import br.com.eniac.eniac.entity.repository.AcompanhamentoRepository;
+import br.com.eniac.eniac.entity.repository.LancamentoRepository;
+import br.com.eniac.eniac.entity.repository.UsuarioRepository;
 import br.com.eniac.eniac.entity.Acompanhamento;
 import br.com.eniac.eniac.entity.Lancamentos;
 import br.com.eniac.eniac.entity.Usuario;
