@@ -1,15 +1,15 @@
 package br.com.eniac.eniac.controller;
 
-import br.com.eniac.eniac.controller.componentes.AcompanhamentoComponents;
+import br.com.eniac.eniac.controller.dto.AcompanhamentoDTO;
 import br.com.eniac.eniac.controller.repository.AcompanhamentoRepository;
-import br.com.eniac.eniac.modulos.Acompanhamento;
-import br.com.eniac.eniac.modulos.Enfermidade;
-import br.com.eniac.eniac.modulos.Usuario;
-import br.com.eniac.eniac.modulos.tratamentos.DiabetesObservacoes;
+import br.com.eniac.eniac.controller.repository.LancamentoRepository;
+import br.com.eniac.eniac.controller.repository.UsuarioRepository;
+import br.com.eniac.eniac.entity.Acompanhamento;
+import br.com.eniac.eniac.entity.Lancamentos;
+import br.com.eniac.eniac.port.clientUserCasePort.AcompanhamentosPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,28 +18,22 @@ import java.util.List;
 @RequestMapping("acompanhamento")
 public class AcompanhamentoController {
 
+
     @Autowired
-    private AcompanhamentoRepository acompanhamentoRepository;
+    private AcompanhamentosPort acompanhamentosPort;
 
     @GetMapping
-    public ResponseEntity<List> getAcompanhamento(){
-        List<Acompanhamento> listaAcompanhamento  = acompanhamentoRepository.findAll();
+    public ResponseEntity<List<Acompanhamento>> getAcompanhamento(){
+        List<Acompanhamento> listaAcompanhamento  = acompanhamentosPort.getAcompanhamentos();
         return new ResponseEntity(listaAcompanhamento, HttpStatus.OK);
     }
 
     @PostMapping
-    @Transactional
-    public ResponseEntity<Acompanhamento> CriaAcompanhamento(@RequestBody AcompanhamentoComponents acomp){
-        System.out.println(acomp);
-        Usuario usuario = new Usuario(acomp.getUser().getNome(), acomp.getUser().getSenha());
-        DiabetesObservacoes diabetesObservacoes = new DiabetesObservacoes(acomp.getEnfermidade().getTratamento().getJejum(),acomp.getEnfermidade().getTratamento().getGlicemia());
-        Enfermidade enfermidade = new Enfermidade(diabetesObservacoes);
-
-        Acompanhamento acompanhamentoCompleto = new Acompanhamento(usuario, enfermidade);
+    public ResponseEntity<Acompanhamento> CriaAcompanhamento(@RequestBody AcompanhamentoDTO ac){
         try{
-            Acompanhamento acompanhamento = acompanhamentoRepository.save(acompanhamentoCompleto);
-            return new ResponseEntity(acompanhamento, HttpStatus.CREATED);
+            return new ResponseEntity(acompanhamentosPort.save(ac), HttpStatus.CREATED);
         }catch (Exception ex){
+            System.out.println(ex.getCause());
             return new ResponseEntity(null, HttpStatus.BAD_REQUEST);
         }
     }

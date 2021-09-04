@@ -1,14 +1,15 @@
 package br.com.eniac.eniac.controller;
 
+import br.com.eniac.eniac.controller.dto.UsuarioDTO;
 import br.com.eniac.eniac.controller.repository.UsuarioRepository;
-import br.com.eniac.eniac.modulos.Usuario;
+import br.com.eniac.eniac.entity.Usuario;
+import br.com.eniac.eniac.port.clientUserCasePort.UsuarioPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -16,17 +17,17 @@ import java.util.List;
 public class UsuarioController {
 
     @Autowired
-    UsuarioRepository usuarioRepository;
+    UsuarioPort port;
 
-    @GetMapping
-    public ResponseEntity<List<Usuario>> user(){
-        List<Usuario> usr = new ArrayList(usuarioRepository.findAll());
-        return new ResponseEntity(usr, HttpStatus.OK);
-    }
+//    @GetMapping
+//    public ResponseEntity<List<Usuario>> user(){
+//        List<Usuario> usr = new ArrayList(port.findAll());
+//        return new ResponseEntity(usr, HttpStatus.OK);
+//    }
 
     @PostMapping
-    public ResponseEntity<Usuario> createUser(@RequestBody Usuario usuario){
-        Usuario usr = usuarioRepository.save(usuario);
+    public ResponseEntity<UsuarioDTO> createUser(@RequestBody Usuario usuario){
+        UsuarioDTO usr = UsuarioDTO.convert(port.setUsuario(usuario));
         return new ResponseEntity(usr, HttpStatus.CREATED);
     }
 

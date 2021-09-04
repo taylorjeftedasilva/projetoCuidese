@@ -1,4 +1,4 @@
-package br.com.eniac.eniac.modulos.enums;
+package br.com.eniac.eniac.userCase.domain.enums;
 
 public enum StatusDiabetes {
 	GLICEMIA_NORMAL,	

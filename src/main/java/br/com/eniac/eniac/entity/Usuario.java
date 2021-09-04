@@ -1,11 +1,13 @@
-package br.com.eniac.eniac.modulos;
+package br.com.eniac.eniac.entity;
 
-import br.com.eniac.eniac.modulos.enums.UsuarioType;
+import br.com.eniac.eniac.userCase.domain.enums.UsuarioType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 @Entity
 @Data
 @NoArgsConstructor
