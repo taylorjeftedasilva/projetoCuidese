@@ -11,6 +11,5 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AcompanhamentoDTO {
-    private Long usuario;
     private List<Lancamentos> lancamentos;
 }

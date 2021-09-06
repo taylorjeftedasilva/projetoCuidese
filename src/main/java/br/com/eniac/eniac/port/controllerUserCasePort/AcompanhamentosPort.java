@@ -1,5 +1,6 @@
 package br.com.eniac.eniac.port.controllerUserCasePort;
 
+import br.com.eniac.eniac.config.TokenService;
 import br.com.eniac.eniac.controller.dto.AcompanhamentoDTO;
 import br.com.eniac.eniac.entity.repository.AcompanhamentoRepository;
 import br.com.eniac.eniac.entity.repository.LancamentoRepository;
@@ -20,20 +21,27 @@ public class AcompanhamentosPort {
     private UsuarioRepository usuarioRepository;
     @Autowired
     private LancamentoRepository lancamentoRepository;
+    @Autowired
+    private TokenService tokenService;
 
-    public List<Acompanhamento> getAcompanhamentos(){
-        Usuario usr = usuarioRepository.getById(Long.valueOf(1));
-        List<Acompanhamento> acompanhamentos = acompanhamentoRepository.findByUsuario(usr);
+    public List<Acompanhamento> getAcompanhamentos(String token){
+        List<Acompanhamento> acompanhamentos = acompanhamentoRepository.findByUsuario(getUsuario(token));
         return acompanhamentos;
     }
 
-    public Acompanhamento setAcompanhamento(Acompanhamento acompanhamento){
-        return acompanhamentoRepository.save(acompanhamento);
+
+//    public Acompanhamento setAcompanhamento(Acompanhamento acompanhamento){
+//        return acompanhamentoRepository.save(acompanhamento);
+//    }
+
+    public Acompanhamento save(AcompanhamentoDTO ac, String token) {
+        List<Lancamentos> lancamentos = lancamentoRepository.saveAll(ac.getLancamentos());
+        Acompanhamento acomp = new Acompanhamento(null, getUsuario(token), lancamentos);
+        return acompanhamentoRepository.save(acomp);
     }
 
-    public Acompanhamento save(AcompanhamentoDTO ac) {
-        List<Lancamentos> lancamentos = lancamentoRepository.saveAll(ac.getLancamentos());
-        Acompanhamento acomp = new Acompanhamento(null, usuarioRepository.getById(Long.valueOf(1)), lancamentos);
-        return acompanhamentoRepository.save(acomp);
+    private Usuario getUsuario(String token) {
+        Long id = tokenService.getIdUsuario(token.substring(7,token.length()));
+        return usuarioRepository.getById(Long.valueOf(id));
     }
 }

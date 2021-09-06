@@ -19,15 +19,15 @@ public class AcompanhamentoController {
     private AcompanhamentosPort acompanhamentosPort;
 
     @GetMapping
-    public ResponseEntity<List<Acompanhamento>> getAcompanhamento(){
-        List<Acompanhamento> listaAcompanhamento  = acompanhamentosPort.getAcompanhamentos();
+    public ResponseEntity<List<Acompanhamento>> getAcompanhamento(@RequestHeader(value="Authorization") String token){
+        List<Acompanhamento> listaAcompanhamento  = acompanhamentosPort.getAcompanhamentos(token);
         return new ResponseEntity(listaAcompanhamento, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Acompanhamento> CriaAcompanhamento(@RequestBody AcompanhamentoDTO ac){
+    public ResponseEntity<Acompanhamento> CriaAcompanhamento(@RequestHeader(value="Authorization") String token, @RequestBody AcompanhamentoDTO ac){
         try{
-            return new ResponseEntity(acompanhamentosPort.save(ac), HttpStatus.CREATED);
+            return new ResponseEntity(acompanhamentosPort.save(ac, token), HttpStatus.CREATED);
         }catch (Exception ex){
             System.out.println(ex.getCause());
             return new ResponseEntity(null, HttpStatus.BAD_REQUEST);

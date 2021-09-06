@@ -1,27 +1,22 @@
 package br.com.eniac.eniac.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Lancamentos {
-
+public class Perfil implements GrantedAuthority {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Date data = new Date();
-    private int dado;
-    private boolean jejum;
+    private String nome;
+
+    @Override
+    public String getAuthority() {
+        return this.nome;
+    }
 }
