@@ -11,6 +11,7 @@ import br.com.eniac.eniac.entity.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -42,31 +43,37 @@ public class AcompanhamentosPort {
         return usuarioRepository.getById(Long.valueOf(id));
     }
     private boolean lancamentoCriado(Lancamentos lancamento){
+        try{
         Optional<Lancamentos> lancamentosOptional = lancamentoRepository.findById(lancamento.getId());
-        System.out.println(lancamentosOptional);
+
         if(lancamentosOptional.isPresent()){
-            System.out.println(lancamentosOptional.get());
             return true;
         }
-        System.out.println("False #################");
         return false;
+        }catch (Exception ex){
+            return false;
+        }
     }
 
     public Acompanhamento update(Long id, AcompanhamentoDTO ac, String token) {
-        Acompanhamento acompanhamento = acompanhamentoRepository.getById(id);
+        Optional<Acompanhamento> exitsAcompanhamento = acompanhamentoRepository.findById(id);
+
         ac.getLancamentos().forEach(lan -> {
             boolean exiteLancamento = lancamentoCriado(lan);
-            if(!exiteLancamento){
+            Long isPresentId = lan.existeID();
+            if(!exiteLancamento ||  isPresentId == 0){
                 Long idLancamento = lancamentoRepository.save(lan).getId();
                 lan.setId(idLancamento);
-                System.out.println(idLancamento);
-                System.out.println("Mudando Valor do lan");
             }
         });
-        Usuario usuario = getUsuario(token);
-        if(usuario.getEmail().equals(acompanhamento.getUsuario().getEmail())){
-            acompanhamento.setLancamentos(ac.getLancamentos());
-            return acompanhamento;
+        if(exitsAcompanhamento.isPresent()){
+            Acompanhamento acompanhamento = exitsAcompanhamento.get();
+            Usuario usuario = getUsuario(token);
+            if(usuario.getEmail().equals(acompanhamento.getUsuario().getEmail())){
+                acompanhamento.setLancamentos(ac.getLancamentos());
+                acompanhamentoRepository.saveAndFlush(acompanhamento);
+                return acompanhamento;
+            }
         }
         return null;
     }
