@@ -34,6 +34,11 @@ public class Usuario implements UserDetails {
 		this.nome = nome;
 		this.senha = senha;
 	}
+	public Usuario(String nome,String email, String senha) {
+		this.nome = nome;
+		this.senha = senha;
+		this.email = email;
+	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
