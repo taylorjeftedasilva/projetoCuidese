@@ -30,9 +30,9 @@ public class AcompanhamentoController {
     }
 
     @PostMapping
-    public ResponseEntity<br.com.eniac.eniac.controller.dto.response.AcompanhamentoDTO> CriaAcompanhamento(@RequestHeader(value="Authorization") String token, @RequestBody AcompanhamentoDTO ac){
+    public ResponseEntity<br.com.eniac.eniac.controller.dto.response.AcompanhamentoDTO> CriaAcompanhamento(@RequestHeader(value="Authorization") String token, @RequestBody AcompanhamentoDTO acompanhamento){
         try{
-            return new ResponseEntity(br.com.eniac.eniac.controller.dto.response.AcompanhamentoDTO.convert(acompanhamentosPort.save(ac, token)), HttpStatus.CREATED);
+            return new ResponseEntity(br.com.eniac.eniac.controller.dto.response.AcompanhamentoDTO.convert(acompanhamentosPort.save(acompanhamento, token)), HttpStatus.CREATED);
         }catch (Exception ex){
             return new ResponseEntity(null, HttpStatus.BAD_REQUEST);
         }

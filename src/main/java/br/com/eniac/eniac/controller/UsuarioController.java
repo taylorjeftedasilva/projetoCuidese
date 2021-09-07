@@ -19,13 +19,12 @@ public class UsuarioController {
     UsuarioPort port;
 
     @PostMapping
-    public ResponseEntity<UsuarioDTO> createUser(@RequestBody br.com.eniac.eniac.controller.dto.request.UsuarioDTO usr){
-        Usuario usuario = new Usuario(usr.getNome(), usr.getEmail(), usr.getSenha());
-        System.out.println(usuario);
-        Optional<Usuario> validacao = port.getUsuario(usuario.getEmail());
+    public ResponseEntity<UsuarioDTO> createUser(@RequestBody br.com.eniac.eniac.controller.dto.request.UsuarioDTO usuario){
+        Usuario usr1 = new Usuario(usuario.getNome(), usuario.getEmail(), usuario.getSenha());
+        Optional<Usuario> validacao = port.getUsuario(usr1.getEmail());
         if(!validacao.isPresent()){
-            usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
-            UsuarioDTO user = UsuarioDTO.convert(port.setUsuario(usuario));
+            usr1.setSenha(new BCryptPasswordEncoder().encode(usr1.getSenha()));
+            UsuarioDTO user = UsuarioDTO.convert(port.setUsuario(usr1));
             return new ResponseEntity(user, HttpStatus.CREATED);
         }
         return ResponseEntity.badRequest().build();
