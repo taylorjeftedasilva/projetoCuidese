@@ -21,7 +21,7 @@ public class SwaggerConfiguration {
                 .apis(RequestHandlerSelectors.basePackage("br.com.eniac.eniac"))
                 .paths(PathSelectors.ant("/**"))
                 .build()
-                .ignoredParameterTypes(Usuario.class)
+//                .ignoredParameterTypes(Usuario.class)
                 .globalOperationParameters(
                         Arrays.asList(
                                 new ParameterBuilder()
