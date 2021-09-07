@@ -11,7 +11,9 @@ import br.com.eniac.eniac.entity.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AcompanhamentosPort {
@@ -39,9 +41,28 @@ public class AcompanhamentosPort {
         Long id = tokenService.getIdUsuario(token.substring(7,token.length()));
         return usuarioRepository.getById(Long.valueOf(id));
     }
+    private boolean lancamentoCriado(Lancamentos lancamento){
+        Optional<Lancamentos> lancamentosOptional = lancamentoRepository.findById(lancamento.getId());
+        System.out.println(lancamentosOptional);
+        if(lancamentosOptional.isPresent()){
+            System.out.println(lancamentosOptional.get());
+            return true;
+        }
+        System.out.println("False #################");
+        return false;
+    }
 
     public Acompanhamento update(Long id, AcompanhamentoDTO ac, String token) {
         Acompanhamento acompanhamento = acompanhamentoRepository.getById(id);
+        ac.getLancamentos().forEach(lan -> {
+            boolean exiteLancamento = lancamentoCriado(lan);
+            if(!exiteLancamento){
+                Long idLancamento = lancamentoRepository.save(lan).getId();
+                lan.setId(idLancamento);
+                System.out.println(idLancamento);
+                System.out.println("Mudando Valor do lan");
+            }
+        });
         Usuario usuario = getUsuario(token);
         if(usuario.getEmail().equals(acompanhamento.getUsuario().getEmail())){
             acompanhamento.setLancamentos(ac.getLancamentos());
