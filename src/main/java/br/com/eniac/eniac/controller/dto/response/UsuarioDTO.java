@@ -1,4 +1,4 @@
-package br.com.eniac.eniac.controller.dto;
+package br.com.eniac.eniac.controller.dto.response;
 
 import br.com.eniac.eniac.entity.Usuario;
 import lombok.AllArgsConstructor;

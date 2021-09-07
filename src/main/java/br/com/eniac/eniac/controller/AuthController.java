@@ -1,7 +1,7 @@
 package br.com.eniac.eniac.controller;
 
-import br.com.eniac.eniac.controller.dto.FormLogin;
-import br.com.eniac.eniac.controller.dto.TokenDto;
+import br.com.eniac.eniac.controller.dto.request.FormLogin;
+import br.com.eniac.eniac.controller.dto.request.TokenDto;
 import br.com.eniac.eniac.config.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

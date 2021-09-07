@@ -1,4 +1,4 @@
-package br.com.eniac.eniac.controller.dto;
+package br.com.eniac.eniac.controller.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
