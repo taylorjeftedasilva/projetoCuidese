@@ -10,6 +10,6 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AcompanhamentoDTO {
+public class AcompanhamentoRequestDTO {
     private List<Lancamentos> lancamentos;
 }

@@ -1,6 +1,6 @@
 package br.com.eniac.eniac.controller;
 
-import br.com.eniac.eniac.controller.dto.request.UsuarioDTO;
+import br.com.eniac.eniac.controller.dto.request.UsuarioRequestDTO;
 import br.com.eniac.eniac.controller.dto.response.UsuarioResponseDTO;
 import br.com.eniac.eniac.entity.Usuario;
 import br.com.eniac.eniac.port.controllerUserCasePort.UsuarioPort;
@@ -13,14 +13,21 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/create/user")
 public class UsuarioController {
 
     @Autowired
     UsuarioPort port;
 
+    @GetMapping
+    public ResponseEntity<String> getUser(){
+        System.out.println("te chamei");
+        return new ResponseEntity("Taylor", HttpStatus.OK);
+    }
+
     @PostMapping
-    public ResponseEntity<UsuarioResponseDTO> createUser(@RequestBody UsuarioDTO usuario){
+    public ResponseEntity<UsuarioResponseDTO> createUser(@RequestBody UsuarioRequestDTO usuario){
         Usuario usr1 = new Usuario(usuario.getNome(), usuario.getEmail(), usuario.getSenha());
         Optional<Usuario> validacao = port.getUsuario(usr1.getEmail());
         if(!validacao.isPresent()){

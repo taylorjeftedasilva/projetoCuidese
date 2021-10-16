@@ -9,12 +9,10 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/auth")
 public class AuthController {
 
@@ -26,12 +24,12 @@ public class AuthController {
 
     @PostMapping
     public ResponseEntity<TokenDto> auth(@RequestBody FormLogin login){
-        UsernamePasswordAuthenticationToken dadosLogin = login.convert();
         try {
+            UsernamePasswordAuthenticationToken dadosLogin = login.convert();
             Authentication authenticaion = authenticationManager.authenticate(dadosLogin);
             String token = tokenService.gerar(authenticaion);
             return ResponseEntity.ok(new TokenDto(token, "Bearer"));
-        }catch (AuthenticationException ex){
+        }catch (Exception ex){
             return ResponseEntity.badRequest().build();
         }
     }

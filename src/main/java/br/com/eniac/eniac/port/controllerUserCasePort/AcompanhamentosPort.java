@@ -1,7 +1,7 @@
 package br.com.eniac.eniac.port.controllerUserCasePort;
 
 import br.com.eniac.eniac.config.TokenService;
-import br.com.eniac.eniac.controller.dto.request.AcompanhamentoDTO;
+import br.com.eniac.eniac.controller.dto.request.AcompanhamentoRequestDTO;
 import br.com.eniac.eniac.entity.repository.AcompanhamentoRepository;
 import br.com.eniac.eniac.entity.repository.LancamentoRepository;
 import br.com.eniac.eniac.entity.repository.UsuarioRepository;
@@ -11,8 +11,6 @@ import br.com.eniac.eniac.entity.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,7 +30,7 @@ public class AcompanhamentosPort {
         return acompanhamentos;
     }
 
-    public Acompanhamento save(AcompanhamentoDTO ac, String token) {
+    public Acompanhamento save(AcompanhamentoRequestDTO ac, String token) {
         List<Lancamentos> lancamentos = lancamentoRepository.saveAll(ac.getLancamentos());
         Acompanhamento acomp = new Acompanhamento(null, getUsuario(token), lancamentos);
         return acompanhamentoRepository.save(acomp);
@@ -55,7 +53,7 @@ public class AcompanhamentosPort {
         }
     }
 
-    public Acompanhamento update(Long id, AcompanhamentoDTO ac, String token) {
+    public Acompanhamento update(Long id, AcompanhamentoRequestDTO ac, String token) {
         Optional<Acompanhamento> exitsAcompanhamento = acompanhamentoRepository.findById(id);
 
         ac.getLancamentos().forEach(lan -> {

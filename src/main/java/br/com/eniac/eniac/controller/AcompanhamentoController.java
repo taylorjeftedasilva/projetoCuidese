@@ -1,6 +1,6 @@
 package br.com.eniac.eniac.controller;
 
-import br.com.eniac.eniac.controller.dto.request.AcompanhamentoDTO;
+import br.com.eniac.eniac.controller.dto.request.AcompanhamentoRequestDTO;
 import br.com.eniac.eniac.controller.dto.response.AcompanhamentoResponseDTO;
 import br.com.eniac.eniac.entity.Acompanhamento;
 import br.com.eniac.eniac.port.controllerUserCasePort.AcompanhamentosPort;
@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@CrossOrigin
 @RequestMapping("acompanhamento")
 public class AcompanhamentoController {
 
@@ -30,7 +31,7 @@ public class AcompanhamentoController {
     }
 
     @PostMapping
-    public ResponseEntity<AcompanhamentoResponseDTO> setAcompanhamento(@RequestHeader(value="Authorization") String token, @RequestBody AcompanhamentoDTO acompanhamento){
+    public ResponseEntity<AcompanhamentoResponseDTO> setAcompanhamento(@RequestHeader(value="Authorization") String token, @RequestBody AcompanhamentoRequestDTO acompanhamento){
         try{
             return new ResponseEntity(AcompanhamentoResponseDTO.convert(acompanhamentosPort.save(acompanhamento, token)), HttpStatus.CREATED);
         }catch (Exception ex){
@@ -38,7 +39,7 @@ public class AcompanhamentoController {
         }
     }
     @PutMapping("/{id}")
-    public ResponseEntity<AcompanhamentoResponseDTO> atualizar(@RequestHeader("Authorization") String token, @PathVariable Long id, @RequestBody AcompanhamentoDTO ac){
+    public ResponseEntity<AcompanhamentoResponseDTO> atualizar(@RequestHeader("Authorization") String token, @PathVariable Long id, @RequestBody AcompanhamentoRequestDTO ac){
         try{
             return new ResponseEntity(AcompanhamentoResponseDTO.convert(acompanhamentosPort.update(id, ac, token)), HttpStatus.OK);
         }catch (Exception ex){

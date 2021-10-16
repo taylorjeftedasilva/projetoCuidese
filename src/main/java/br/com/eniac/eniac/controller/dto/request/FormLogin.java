@@ -9,6 +9,9 @@ public class FormLogin {
     private String senha;
 
     public UsernamePasswordAuthenticationToken convert() {
+        if(email.isEmpty() ||  senha.isEmpty()){
+            throw new NullPointerException("Email ou senha invalidos");
+        }
         return new UsernamePasswordAuthenticationToken(email,senha);
     }
 }
