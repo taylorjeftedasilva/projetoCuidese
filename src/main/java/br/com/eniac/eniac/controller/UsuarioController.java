@@ -28,6 +28,7 @@ public class UsuarioController {
 
     @PostMapping
     public ResponseEntity<UsuarioResponseDTO> createUser(@RequestBody UsuarioRequestDTO usuario){
+        try{
         Usuario usr1 = new Usuario(usuario.getNome(), usuario.getEmail(), usuario.getSenha());
         Optional<Usuario> validacao = port.getUsuario(usr1.getEmail());
         if(!validacao.isPresent()){
@@ -35,7 +36,10 @@ public class UsuarioController {
             UsuarioResponseDTO user = UsuarioResponseDTO.convert(port.setUsuario(usr1));
             return new ResponseEntity(user, HttpStatus.CREATED);
         }
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.badRequest().build();}
+        catch (NullPointerException nl ){
+            return ResponseEntity.badRequest().build();
+        }
     }
 
 

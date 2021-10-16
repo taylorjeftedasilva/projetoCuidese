@@ -37,6 +37,9 @@ public class Usuario implements UserDetails {
 		this.senha = senha;
 	}
 	public Usuario(String nome,String email, String senha) {
+		if(nome.isEmpty() || email.isEmpty() || senha.isEmpty()){
+			throw new NullPointerException();
+		}
 		this.nome = nome;
 		this.senha = senha;
 		this.email = email;
